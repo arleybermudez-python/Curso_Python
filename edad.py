@@ -13,7 +13,7 @@ while True:
             if nacimiento > anio_actual:
                 print("El año no puede ser mayor al año actual")
             elif nacimiento < 1925:
-                print("Es muy poco probable que esta persona tenga mas de 100 años")
+                print("Es muy poco probable que esta persona aún este con vida")
             else:
                     #Nunca confies en lo que escribe el usuario, puede escribir letras en vez de numeros
                     edad = anio_actual - nacimiento
