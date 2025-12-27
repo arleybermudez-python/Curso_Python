@@ -15,10 +15,10 @@ while True:
             elif nacimiento < 1925:
                 print("Es muy poco probable que esta persona tenga mas de 100 años")
             else:
-            #Nunca confies en lo que escribe el usuario, puede escribir letras en vez de numeros
-            edad = anio_actual - nacimiento
-            print(f"Sr. {nombre.title()} su edad es: {edad} años")
-            break 
+                    #Nunca confies en lo que escribe el usuario, puede escribir letras en vez de numeros
+                    edad = anio_actual - nacimiento
+                    print(f"Sr. {nombre.title()} su edad es: {edad} años")
+                    break 
             #El break detiene el WHILE y termina el programa
     except ValueError:
         print("¡ERROR! Debe ingresar solo numeros")
