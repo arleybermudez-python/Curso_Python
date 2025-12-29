@@ -4,7 +4,7 @@ url = "https://open.er-api.com/v6/latest/USD"
 print(" CONVERSOR MULTIMONEDA")
 try:
     #traemos los datos de internet
-    print("Actualizando tasas de cambio...")
+    print("Actualizando tasas de cambio... espere un momento por favor")
     respuesta = requests.get(url)
     datos = respuesta.json()
     tasas = datos['rates'] #Aqui estan todas las monedas del mundo
