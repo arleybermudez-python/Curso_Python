@@ -21,10 +21,12 @@ try:
 
             tasa = tasas[moneda_destino]
             resultado = cantidad * tasa
+            fecha = datos['time_last_update_utc']
 
             print(f"RESULTADO")
             print(f"{cantidad:,} USD equivalen a {resultado:,.2f} {moneda_destino}")
             print(f"Tasa del día: 1 USD = {tasa:,.2f} {moneda_destino}")
+            print(f"Ultima actualización: {fecha}")
             break
         else:
             print("Esa moneda no es valida o no está en nuestra lista. Intenta de nuevo.")
