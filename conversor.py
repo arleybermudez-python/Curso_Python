@@ -11,7 +11,7 @@ try:
 
     while True:
         print("\nOpciones de conversión disponibles: COP, MXN, EUR, GBP, JPY")
-        moneda_destino = input("¿A que moneda desea convertir? (o escribe 'salir':").upper()
+        moneda_destino = input("¿A que moneda desea convertir? (o escribe 'salir':)").upper()
 
         if moneda_destino == "SALIR":
             break
