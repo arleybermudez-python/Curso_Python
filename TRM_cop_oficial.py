@@ -1,36 +1,47 @@
 import requests
 import os
 
-def consultar_precio_dolar():
+def consultar_trm_oficial_2026():
     os.system('cls' if os.name == 'nt' else 'clear')
     print("==========================================")
-    print("   CONSULTOR DE PRECIO DÓLAR (ESTABLE)    ")
+    print("   CONSULTA OFICIAL TRM - DATOS ABIERTOS  ")
     print("==========================================")
     
-    # Esta URL no necesita API Key
-    url = "https://open.er-api.com/v6/latest/USD"
+    # Esta es la URL basada en el dataset que encontraste (32sa-8pi3)
+    # Pedimos que nos lo ordene por fecha para tener la más reciente arriba
+    url = "https://www.datos.gov.co/resource/32sa-8pi3.json?$order=vigenciadesde DESC&$limit=1"
+    
+    headers = {"User-Agent": "Mozilla/5.0"}
 
     try:
-        print("Obteniendo datos del mercado financiero...")
-        response = requests.get(url, timeout=10)
-        
-        # Si hay un error de conexión, esto lo atrapará
+        print("Conectando con la base de datos del Gobierno...")
+        response = requests.get(url, headers=headers, timeout=15)
         response.raise_for_status()
         
         datos = response.json()
 
-        # En esta API, el precio de Colombia está en ['rates']['COP']
-        tasa_cop = datos['rates']['COP']
-        actualizacion = datos['time_last_update_utc']
+        if datos:
+            # En este dataset específico, las columnas suelen ser:
+            # 'valor', 'vigenciadesde', 'vigenciahasta'
+            item = datos[0]
+            
+            # Usamos .get() con mayúsculas y minúsculas por seguridad
+            valor = item.get('valor') or item.get('VALOR')
+            fecha = item.get('vigenciadesde') or item.get('VIGENCIADESDE')
 
-        print(f"\n✅ DATOS OBTENIDOS CORRECTAMENTE")
-        print(f"💵 1 Dólar (USD) = {tasa_cop:,.2f} Pesos (COP)")
-        print(f"📅 Actualizado: {actualizacion[:16]}")
-        print("==========================================")
+            if valor:
+                print(f"\n✅ DATOS ACTUALIZADOS:")
+                print(f"💵 Valor: ${float(valor):,.2f} COP")
+                print(f"📅 Vigencia desde: {fecha[:10]}")
+                print("==========================================")
+            else:
+                print("\n❌ Se encontró el registro pero la columna no se llama 'valor'.")
+                print(f"Columnas disponibles: {list(item.keys())}")
+        else:
+            print("\n❌ No se encontraron datos en este conjunto.")
 
     except Exception as e:
-        print(f"\n❌ Error al conectar: {e}")
-        print("Consejo: Revisa que tu firewall no esté bloqueando a Python.")
+        print(f"\n⚠️ Error de acceso: {e}")
 
-consultar_precio_dolar()
+consultar_trm_oficial_2026()
 input("\nPresione ENTER para salir...")
