@@ -50,6 +50,8 @@ print(numeros_lista)
 
 numeros_lista.sort()
 print(numeros_lista)
+print(numeros_lista)
+
 
 
 
